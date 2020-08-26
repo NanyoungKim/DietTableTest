@@ -1,0 +1,2 @@
+rootProject.name='DietTableTest'
+include ':app'
