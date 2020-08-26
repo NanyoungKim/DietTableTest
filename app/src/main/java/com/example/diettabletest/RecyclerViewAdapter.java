@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -44,6 +45,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     Context context;
     public static int position;
 
+
+    Button btn_bucket;
+
+
+
     public interface DataTransferInterface{
         //public void setValues(ArrayList<FoodInfo> ingredientToOrder);
     }
@@ -63,6 +69,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         listItem = new ArrayList<>();
 
     }
+
+
 
     public void setOnItemClickListener(ItemListener listener){
         mListener = listener;
@@ -135,8 +143,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         });
 
 
-
-
+        //getActivity().btn_bucket.setOnClickListener(new View.OnClickListener() {
 
 
 
@@ -161,10 +168,41 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.check_box.setChecked(isChecked);
 
-        Intent intent = new Intent("custom-message");
-        intent.putExtra("result", ingredientToOrder);
+        ((FoodActivity)context).btn_bucket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("custom-message");
+                intent.putExtra("result", ingredientToOrder);
 
-        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                System.out.println("보낸다!!!   " + getOrderedFList().size());
+
+            }
+        });
+
+
+
+
+//
+//        btn_bucket.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent("custom-message");
+//                intent.putExtra("result", ingredientToOrder);
+//
+//                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+//            }
+//        });
+
+
+//        Intent intent = new Intent("custom-message");
+//        intent.putExtra("result", ingredientToOrder);
+//
+//        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+
+
+
 
 
 
@@ -176,6 +214,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount() {
         return UniqueFoodcodeList == null ? 0 : UniqueFoodcodeList.size();
     }
+
+
+//    public void buttonClick(){
+//
+//
+//        Intent intent = new Intent("custom-message");
+//        intent.putExtra("result", ingredientToOrder);
+//
+//        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+//        System.out.println("보낸다!!!   " + ingredientToOrder.size());
+//    }
+
+
+
     public String getFoodName(Long fcode){
         String ans = "";
         for(int i = 0; i< FoodObject.size(); i++){
@@ -236,6 +288,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView name;
         View textContainer;
         CheckBox check_box;
+        //Button btn_bucket;
 
 
     public ViewHolder(View itemView) {
@@ -246,6 +299,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         name = (TextView) itemView.findViewById(R.id.list_text);
         textContainer = itemView.findViewById(R.id.text_container);
         check_box = (CheckBox) itemView.findViewById(R.id.check_box);
+
+        //btn_bucket = (Button)itemView.findViewById(R.id.btn_bucket);
+
     }
 
 
@@ -254,7 +310,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.pName = pName;
         name.setText(pName.getFoodName());
     }
-
 
 
 

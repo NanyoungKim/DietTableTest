@@ -52,6 +52,8 @@
             </androidx.viewpager.widget.ViewPager>
 
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -78,8 +80,6 @@
 
                     android:text="최종 발주하기"/>
             </LinearLayout>
-
-
 
 
 

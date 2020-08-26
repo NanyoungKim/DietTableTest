@@ -43,9 +43,10 @@ public class FirstFragment extends Fragment {
 
 
     RecyclerView clv;
-
-
     Button btn_order;
+
+
+
 
 
     public static FirstFragment newInstance() {
@@ -161,7 +162,12 @@ public class FirstFragment extends Fragment {
         clv.setHasFixedSize(true);
         clv.setAdapter(itemsAdapter);
 
-        btn_order = (Button)view.findViewById(R.id.btn_order);
+
+
+
+
+
+
 
 
 
