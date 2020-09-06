@@ -18,6 +18,7 @@ import androidx.cardview.widget.CardView;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private Map<RecyclerViewModel, Boolean> checkedMap = new HashMap<>();
     private ArrayList<RecyclerViewModel> ingredientPerFood = new ArrayList();
-    private ArrayList<RecyclerViewModel> ingredientToOrder = new ArrayList<>();
+    private ArrayList<RecyclerViewModel> ingredientToOrder = new ArrayList<RecyclerViewModel>();
     private ArrayList<Integer> listItem;
 
 
@@ -46,7 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public static int position;
 
 
-    Button btn_bucket;
+    Button btn_bucket2, btn_order2;
 
 
 
@@ -167,15 +168,35 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
         holder.check_box.setChecked(isChecked);
+       // System.out.println("@@@@@@@@@@@@");
 
-        ((FoodActivity)context).btn_bucket.setOnClickListener(new View.OnClickListener() {
+        final Intent intent = new Intent("custom-message");
+
+        btn_bucket2 = (Button) ((FoodActivity)context).findViewById(R.id.btn_bucket);
+        btn_bucket2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("custom-message");
                 intent.putExtra("result", ingredientToOrder);
 
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 System.out.println("보낸다!!!   " + getOrderedFList().size());
+
+            }
+        });
+
+        btn_order2 = (Button) ((FoodActivity)context).findViewById(R.id.btn_order);
+        btn_order2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(context, NextActivity.class);
+                intent2.putExtra("orderedFList", (Serializable) ingredientToOrder);        //여기서 못 받아와서 null 값 보내게 됨.
+
+
+
+
+
+                context.startActivity(intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                //startActivity(intent);
 
             }
         });

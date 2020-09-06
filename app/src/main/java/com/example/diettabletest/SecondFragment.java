@@ -1,5 +1,8 @@
 package com.example.diettabletest;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,6 +30,8 @@ public class SecondFragment extends Fragment {
     ArrayList<RecyclerViewModel> UniqueFList = new ArrayList<RecyclerViewModel>();
 
     ArrayList<Long> UniqueFcodeList = new ArrayList<>();
+    ArrayList<RecyclerViewModel> resultList = new ArrayList<RecyclerViewModel>();
+    RecyclerView clv;
 
 
 
@@ -114,6 +119,17 @@ public class SecondFragment extends Fragment {
 
     }
 
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            resultList = (ArrayList<RecyclerViewModel>) intent.getSerializableExtra("result");
+
+            System.out.println(resultList.size());
+            //Toast.makeText(FoodActivity.this, resultList).size( , Toast.LENGTH_SHORT).show();
+
+        }
+    };
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -127,7 +143,9 @@ public class SecondFragment extends Fragment {
 
         final RecyclerViewAdapter itemsAdapter = new RecyclerViewAdapter(SecondFragment.this.getActivity(),
                 UniqueFcodeList, UniqueFList, foodList, null);
-        final RecyclerView clv = (RecyclerView) view.findViewById(R.id.clist);
+       // final RecyclerView clv = (RecyclerView) view.findViewById(R.id.clist);
+        clv = (RecyclerView) view.findViewById(R.id.clist);
+
         clv.setLayoutManager(new LinearLayoutManager(SecondFragment.this.getActivity()));
         clv.setHasFixedSize(true);
         clv.setAdapter(itemsAdapter);

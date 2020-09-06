@@ -1,6 +1,8 @@
 package com.example.diettabletest;
 
-public class RecyclerViewModel  {
+import java.io.Serializable;
+
+public class RecyclerViewModel implements Serializable {
     //private String mItemName;
 
     private long foodCode;       //국, 밥, 죽, ,,

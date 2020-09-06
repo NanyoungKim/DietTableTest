@@ -21,12 +21,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import static android.util.Log.d;
 
 public class FoodActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, RecyclerViewAdapter.DataTransferInterface {
 
@@ -85,7 +88,7 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
+        System.out.println("~~~~~~~~~~~~~~~~");
 
         setContentView(R.layout.activity_main);
 
@@ -142,20 +145,17 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
-
+        System.out.println("!!!!!!!!!!!!!!!!!");
         ////////////@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         recyclerView = (RecyclerView) findViewById(R.id.clist);
-       // recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setHasFixedSize(true);
+//        layoutManager = new LinearLayoutManager(this);
 //        recyclerView.setLayoutManager(layoutManager);
 
 
 
 
-
-       // final Intent intent = new Intent(getApplicationContext(), NextActivity.class);
-
-        btn_bucket= (Button)findViewById(R.id.btn_bucket);
+        btn_bucket = (Button) findViewById(R.id.btn_bucket);
 //        btn_bucket.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -177,26 +177,25 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
 //                };
 
 
-
-                LocalBroadcastManager.getInstance(FoodActivity.this).registerReceiver(mMessageReceiver, new IntentFilter("custom-message"));
-               // mAdap = new RecyclerViewAdapter(FoodActivity.this);
-                //mAdap.buttonClick();
-               // realrealList.addAll(mAdap.getOrderedFList());
-
+        LocalBroadcastManager.getInstance(FoodActivity.this).registerReceiver(mMessageReceiver, new IntentFilter("custom-message"));
+        // mAdap = new RecyclerViewAdapter(FoodActivity.this);
+        //mAdap.buttonClick();
+        // realrealList.addAll(mAdap.getOrderedFList());
 
 
+        System.out.println(("장바구니에 담았습니다 / resultList 크기는 : " + resultList.size()));
+        System.out.println(("장바구니에 담았습니다 / resultList 크기는 : " + realList.size()));
+        System.out.println(("장바구니에 담았습니다 / resultList 크기는 : " + realrealList.size()));
 
 
 
-                System.out.println(("장바구니에 담았습니다 / resultList 크기는 : " + resultList.size()));
-                System.out.println(("장바구니에 담았습니다 / resultList 크기는 : " + realList.size()));
-                System.out.println(("장바구니에 담았습니다 / resultList 크기는 : " + realrealList.size()));
-    //        }
-      //  });
+
 
 
         //최종 주문 발주 넣으면 Next Activity 로 데이터 넘어감
-     //   btn_order = (Button)findViewById(R.id.btn_order);
+
+         final Intent intent = new Intent(getApplicationContext(), NextActivity.class);
+//        btn_order = (Button)findViewById(R.id.btn_order);
 //        btn_order.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -218,6 +217,12 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
 //
 //
 //
+//                d("보내졌나", intent.toString());
+//
+//
+//                startActivity(intent);
+//
+//                Toast.makeText(FoodActivity.this, "선택되었습니다.", Toast.LENGTH_LONG).show();
 //            }
 //        });
 

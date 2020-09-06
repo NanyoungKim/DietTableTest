@@ -29,6 +29,8 @@ public class ThirdFragment extends Fragment {
 
     ArrayList<Long> UniqueFcodeList = new ArrayList<>();
 
+    RecyclerView clv;
+    ArrayList<RecyclerViewModel> resultList = new ArrayList<RecyclerViewModel>();
 
 
 
@@ -130,7 +132,9 @@ public class ThirdFragment extends Fragment {
 
         final RecyclerViewAdapter itemsAdapter = new RecyclerViewAdapter(ThirdFragment.this.getActivity(),
                 UniqueFcodeList, UniqueFList, foodList, null);
-        final RecyclerView clv = (RecyclerView) view.findViewById(R.id.clist);
+       // final RecyclerView clv = (RecyclerView) view.findViewById(R.id.clist);
+        clv = (RecyclerView) view.findViewById(R.id.clist);
+
         clv.setLayoutManager(new LinearLayoutManager(ThirdFragment.this.getActivity()));
         clv.setHasFixedSize(true);
         clv.setAdapter(itemsAdapter);
